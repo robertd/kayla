@@ -18,6 +18,7 @@
         <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.1/esri-leaflet.js"></script>
 
         <script src="data/districts.geojson" type="text/javascript"></script>
+        <script src="data/schools.geojson" type="text/javascript"></script>
 
         <style>
           body {margin:0;padding:0;}
@@ -43,6 +44,52 @@
           });
           map.fitBounds(districtsGeojson.getBounds());
           districtsGeojson.addTo(map);
+
+          var schoolsGeojson = L.geoJson(schools, {
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup("<table>" +
+              "<tbody>" +
+              "<tr>" +
+                "<td>SCHOOLCODE</td>" +
+                "<td>" + feature.properties['SCHOOLCODE'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>DISTNAME</td>" +
+                "<td>" + feature.properties['DISTNAME'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>SCHOOLNAME</td>" +
+                "<td>" + feature.properties['SCHOOLNAME'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>ADDRESS</td>" +
+                "<td>" + feature.properties['ADDRESS'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>Lowest</td>" +
+                "<td>" + feature.properties['Lowest'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>Highest</td>" +
+                "<td>" + feature.properties['Highest'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>City</td>" +
+                "<td>" + feature.properties['City'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>Zipcode</td>" +
+                "<td>" + feature.properties['Zipcode'] + "</td>" +
+              "</tr>" +
+              "<tr>" +
+                "<td>Type</td>" +
+                "<td>" + feature.properties['Type'] + "</td>" +
+              "</tr>" +
+              "</tbody>" +
+              "</table>");
+            }
+          });
+          schoolsGeojson.addTo(map);
 
         </script>
 
