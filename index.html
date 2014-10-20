@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <!-- Load Leaflet from CDN-->
+        <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.css" />
+        <script src="http://cdn.leafletjs.com/leaflet-0.7.3/leaflet.js"></script>
+
+        <!-- Load Esri Leaflet from CDN -->
+        <script src="http://cdn-geoweb.s3.amazonaws.com/esri-leaflet/1.0.0-rc.1/esri-leaflet.js"></script>
+
+        <script src="data/districts.geojson" type="text/javascript"></script>
+
+        <style>
+          body {margin:0;padding:0;}
+          #map {position: absolute;top:0;bottom:0;right:0;left:0;}
+        </style>
+    </head>
+    <body>
+        <!--[if lt IE 7]>
+            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+        <![endif]-->
+
+        <div id="map"></div>
+
+        <script>
+          var map = L.map('map').setView([39.95, -105.00], 10);
+          L.esri.basemapLayer('Topographic').addTo(map);
+
+
+          var districtsGeojson = L.geoJson(districts, {
+            onEachFeature: function (feature, layer) {
+              layer.bindPopup(feature.properties['NAME10']);
+            }
+          });
+          districtsGeojson.addTo(map);
+
+        </script>
+
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    </body>
+</html>
