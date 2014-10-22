@@ -43,8 +43,7 @@
             }
           });
           map.fitBounds(districtsGeojson.getBounds());
-          districtsGeojson.addTo(map);
-
+          
           var schoolsGeojson = L.geoJson(schools, {
             onEachFeature: function (feature, layer) {
               layer.bindPopup("<table>" +
@@ -89,7 +88,13 @@
               "</table>");
             }
           });
-          schoolsGeojson.addTo(map);
+          
+          var overlays = {
+            "School Districts": districtsGeojson,
+            "Schools": schoolsGeojson
+          };
+
+          L.control.layers([],overlays).addTo(map);
 
         </script>
 
